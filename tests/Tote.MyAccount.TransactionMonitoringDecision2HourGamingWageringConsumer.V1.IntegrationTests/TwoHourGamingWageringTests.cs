@@ -13,7 +13,7 @@ public class TwoHourGamingWageringTests : IAsyncLifetime, IClassFixture<KafkaFix
     public TwoHourGamingWageringTests(KafkaFixture kafka, WireMockFixture wireMock)
     {
         Environment.SetEnvironmentVariable("Service:Ports:Health", HealthCheckPort.ToString());
-        Environment.SetEnvironmentVariable("ervice:BackOffice:BaseAddress", "https://api.tote.rocks");
+        Environment.SetEnvironmentVariable("Service:BackOffice:BaseAddress", "https://api.tote.rocks");
         Environment.SetEnvironmentVariable("Service:Slack:ChannelName", "stop-sell-test");
         _kafka = kafka;
         _wireMock = wireMock;
