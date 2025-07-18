@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tote.MyAccount.TransactionM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1", "source\Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1\Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1.csproj", "{B304CE5C-0258-43B0-91CF-60E0A950DF83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1.IntegrationTests", "tests\Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1.IntegrationTests\Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1.IntegrationTests.csproj", "{58F17AD3-9624-4364-89A7-ED449546F0D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{B304CE5C-0258-43B0-91CF-60E0A950DF83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B304CE5C-0258-43B0-91CF-60E0A950DF83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B304CE5C-0258-43B0-91CF-60E0A950DF83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58F17AD3-9624-4364-89A7-ED449546F0D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58F17AD3-9624-4364-89A7-ED449546F0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58F17AD3-9624-4364-89A7-ED449546F0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58F17AD3-9624-4364-89A7-ED449546F0D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,5 +41,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5E5E660A-F48F-4E07-864D-5ABF14133881} = {C9CE62B0-A1CA-4419-88F8-B24DAF0C7339}
+		{58F17AD3-9624-4364-89A7-ED449546F0D4} = {C9CE62B0-A1CA-4419-88F8-B24DAF0C7339}
 	EndGlobalSection
 EndGlobal
