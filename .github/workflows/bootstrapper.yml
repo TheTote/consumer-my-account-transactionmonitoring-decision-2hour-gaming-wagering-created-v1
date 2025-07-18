@@ -1,0 +1,49 @@
+name: Re-usable Bootstrapping on the Repo on creation
+
+on:
+  workflow_dispatch: {}
+  push:
+
+jobs:
+  get-current-step:
+    name: Check current step number
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - id: get-step
+        run: |
+          echo "current-step=$(cat ./.github/script/STEP)" >> $GITHUB_OUTPUT
+    outputs:
+      current-step: ${{ steps.get-step.outputs.current-step }}
+
+  update-repo-step-and-push:
+    name: Updates the repo step and then pushes the changes
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: get-current-step
+
+    if: >-
+      ${{ needs.get-current-step.outputs.current-step == 0 }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Update Step
+        run: |
+          sed -i 's/0/1/' .github/script/STEP
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  bootstrap-repo:
+    needs: update-repo-step-and-push
+
+    uses: thetote/workflows/.github/workflows/bootstrap.yml@main
+    with:
+      github-branch: 'main'
+    secrets:
+      app-id: ${{ secrets.TERRY_TOTE_APP_ID }}
+      private-key: ${{ secrets.TERRY_TOTE_KEY }}

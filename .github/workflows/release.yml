@@ -1,0 +1,21 @@
+name: Build and Release
+run-name: >
+  ${{
+  (github.event_name == 'push' && github.ref == 'refs/heads/main') && 'Build and Release for main branch'
+  || format('Build and Release for {0}', github.ref_name)
+  }}
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+      - feature/*
+    paths-ignore:
+      - "docs/**"
+
+jobs:
+  release:
+    name: Run Release Workflow
+    uses: thetote/workflows/.github/workflows/dotnet-release.yml@main
+    secrets:
+      github-token: ${{ secrets.CI_TOKEN }}

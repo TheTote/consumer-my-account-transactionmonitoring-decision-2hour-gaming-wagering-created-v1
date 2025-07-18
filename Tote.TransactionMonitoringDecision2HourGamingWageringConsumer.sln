@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{982EB903-16B2-4C5C-9E9C-F05142F5CD07}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C9CE62B0-A1CA-4419-88F8-B24DAF0C7339}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1.UnitTests", "tests\Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1.UnitTests\Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1.UnitTests.csproj", "{5E5E660A-F48F-4E07-864D-5ABF14133881}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1", "source\Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1\Tote.MyAccount.TransactionMonitoringDecision2HourGamingWageringConsumer.V1.csproj", "{B304CE5C-0258-43B0-91CF-60E0A950DF83}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E5E660A-F48F-4E07-864D-5ABF14133881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E5E660A-F48F-4E07-864D-5ABF14133881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B304CE5C-0258-43B0-91CF-60E0A950DF83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B304CE5C-0258-43B0-91CF-60E0A950DF83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B304CE5C-0258-43B0-91CF-60E0A950DF83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B304CE5C-0258-43B0-91CF-60E0A950DF83}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6D1803A-F61C-4C29-A564-2BCB2ADB9637}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5E5E660A-F48F-4E07-864D-5ABF14133881} = {C9CE62B0-A1CA-4419-88F8-B24DAF0C7339}
+	EndGlobalSection
+EndGlobal

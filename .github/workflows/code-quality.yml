@@ -1,0 +1,21 @@
+name: Check Code Quality
+
+on:
+  workflow_dispatch: {}
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  code-quality:
+    name: Code Quality
+    uses: thetote/workflows/.github/workflows/code-quality.yml@main
+    with:
+      unit-test-filter: UnitTests
+      files: "coverage.cobertura.xml"
+      flags: unit
+      fail-ci-if-error: true
+    secrets:
+      github-token: ${{ secrets.CI_TOKEN }}
+      sonar-token: ${{ secrets.SONAR_TOKEN }}
+      sonar-host-url: ${{ secrets.SONAR_HOST_URL }}

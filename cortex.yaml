@@ -1,0 +1,59 @@
+openapi: 3.0.1
+info:
+  title: TransactionMonitoringDecision2HourGamingWagering Consumer
+  description: Transaction Monitoring Decision 2 Hour Gaming Wagering Consumer
+  x-cortex-git:
+    github:
+      repository: TheTote/consumer-my-account-transactionmonitoring-decision-2hour-gaming-wagering-created-v1
+  x-cortex-tag: consumer-consumer-my-account-transactionmonitoring-decision-2hour-gaming-wagering-created-v1
+  x-cortex-link:
+    - url: https://app.circleci.com/pipelines/github/TheTote/consumer-my-account-transactionmonitoring-decision-2hour-gaming-wagering-created-v1
+      name: CircleCI
+      type: circleci
+    - name: Runbook
+      type: runbook
+      url: 'https://thetote.atlassian.net/wiki/spaces/EN/pages/4052877314/TransactionMonitoringDecision2HourGamingWageringConsumer'
+    - name: Documentation
+      type: documentation
+      url: 'https://thetote.atlassian.net/wiki/spaces/EN/pages/4052320262/TransactionMonitoringDecision2HourGamingWageringConsumer'
+  x-cortex-type: service
+  x-cortex-slack:
+    channels: []
+  x-cortex-groups:
+    - theme:share-of-wallet
+    - app-type:consumer
+  x-cortex-issues:
+    jira:
+      projects:
+        - name: "MYACC"
+      components:
+        - name: SW
+  x-cortex-dashboards:
+    embeds:
+      - type: grafana
+        url: 'https://grafana.tote.engineering/d-solo/a0768278-19c0-4434-b8c6-354fe16fc019/application-slo-performance?orgId=1&refresh=10s&var-Datasource=mimir-production&var-application=TransactionMonitoringDecision2HourGamingWageringConsumer&var-slo=All&var-env=production&theme=light&panelId=29'
+      - type: grafana
+        url: 'https://grafana.tote.engineering/d/RX4evNeVz/application-overview?orgId=1&var-LokiDS=loki-production&var-PrometheusDS=mimir-production&var-TempoDS=tempo-production&var-Environment=production&var-Instance=TransactionMonitoringDecision2HourGamingWageringConsumer&var-LogLevel=Warning&var-LogLevel=Error&var-LogLevel=Fatal&var-Service=TransactionMonitoringDecision2HourGamingWageringConsumer'
+  x-cortex-owners:
+    - name: my-account-team
+      type: group
+      provider: CORTEX
+  x-cortex-parents:
+    - tag: my-account-domain
+  x-cortex-dependency:
+    cortex: []
+  x-cortex-static-analysis:
+    sonarqube:
+      project: consumer-my-account-transactionmonitoring-decision-2hour-gaming-wagering-created-v1
+  x-cortex-slos:
+    prometheus:
+      - name: slo-http-availability
+        alias: Production Mimir
+        totalQuery: "1"
+        slo: 99.5
+        errorQuery: 'slo:sli_error:ratio_rate5m{slo_service=TransactionMonitoringDecision2HourGamingWageringConsumer, slo="http-availability"}'
+      - name: slo-http-latency
+        alias: Production Mimir
+        totalQuery: "1"
+        slo: 95
+        errorQuery: 'slo:sli_error:ratio_rate5m{slo_service=TransactionMonitoringDecision2HourGamingWageringConsumer, slo="http-latency"}'

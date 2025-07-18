@@ -1,0 +1,121 @@
+version: 2.1
+orbs:
+  gitops: tote/gitops-orb@1.0.7
+
+parameters:
+  application-name:
+    description: "Name of application folder in apps repo"
+    type: string
+    default: |
+      consumer/my-account-transactionmonitoring-decision-2hour-gaming-wagering-created-v1
+
+  target-repository-name:
+    description: "Name of the repository the application is deployed from."
+    type: string
+    default: racing-platform-apps-my-account
+
+workflows:
+  deploy:
+    jobs:
+      # Development
+      - approve-dev-deploy:
+          type: approval
+          filters: &filter-prerelease-tags-only
+            branches:
+              ignore: /.*/
+            tags:
+              only:
+                - /v{0,1}[0-9]+\.[0-9]+\.[0-9]+(?:-rc.+|-feature-.+|$)/
+      - gitops/send-update-app-version:
+          context: DEPLOY_REQUEST
+          name: Trigger Development
+          environment: development
+          waiting-job-name: Waiting for Confirmation (development)
+          tag-value: ${CIRCLE_TAG/#v}
+          app-name: <<pipeline.parameters.application-name>>
+          target-repository-name: <<pipeline.parameters.target-repository-name>>
+          filters: *filter-prerelease-tags-only
+          requires:
+            - approve-dev-deploy
+      - wait-for-deploy-development:
+          name: Waiting for Confirmation (development)
+          type: approval
+          requires:
+            - Trigger Development
+          filters: *filter-prerelease-tags-only
+      # Test
+      - approve-test-deploy:
+          type: approval
+          filters: *filter-prerelease-tags-only
+          requires:
+            - Waiting for Confirmation (development)
+      - gitops/send-update-app-version:
+          context: DEPLOY_REQUEST
+          name: Trigger Test
+          environment: test
+          waiting-job-name: Waiting for Confirmation (test)
+          tag-value: ${CIRCLE_TAG/#v}
+          app-name: <<pipeline.parameters.application-name>>
+          target-repository-name: <<pipeline.parameters.target-repository-name>>
+          filters: *filter-prerelease-tags-only
+          requires:
+            - approve-test-deploy
+      - wait-for-deploy-test:
+          name: Waiting for Confirmation (test)
+          type: approval
+          filters: *filter-prerelease-tags-only
+          requires:
+            - Trigger Test
+      # Staging
+      - approve-staging-deploy:
+          type: approval
+          filters: *filter-prerelease-tags-only
+          requires:
+            - Waiting for Confirmation (test)
+      - gitops/send-update-app-version:
+          context: DEPLOY_REQUEST
+          name: Trigger Staging
+          environment: staging
+          waiting-job-name: Waiting for Confirmation (staging)
+          tag-value: ${CIRCLE_TAG/#v}
+          app-name: <<pipeline.parameters.application-name>>
+          target-repository-name: <<pipeline.parameters.target-repository-name>>
+          filters: *filter-prerelease-tags-only
+          requires:
+            - approve-staging-deploy
+      - wait-for-deploy-staging:
+          name: Waiting for Confirmation (staging)
+          type: approval
+          filters: *filter-prerelease-tags-only
+          requires:
+            - Trigger Staging
+      # Production
+      - approve-production-deploy:
+          type: approval
+          filters: &filter-release-tags-only
+            branches:
+              ignore: /.*/
+            tags:
+              only:
+                - /v{0,1}[0-9]+\.[0-9]+\.[0-9]+$/
+          requires:
+            - Waiting for Confirmation (development)
+            - Waiting for Confirmation (test)
+            - Waiting for Confirmation (staging)
+      - gitops/send-update-app-version:
+          context: DEPLOY_REQUEST
+          filters: *filter-release-tags-only
+          name: Trigger Production
+          environment: production
+          waiting-job-name: Waiting for Confirmation (production)
+          tag-value: ${CIRCLE_TAG/#v}
+          app-name: <<pipeline.parameters.application-name>>
+          target-repository-name: <<pipeline.parameters.target-repository-name>>
+          requires:
+            - approve-production-deploy
+      - wait-for-deploy-production:
+          name: Waiting for Confirmation (production)
+          type: approval
+          filters: *filter-release-tags-only
+          requires:
+            - Trigger Production
